@@ -1,0 +1,43 @@
+name: Daily Email Task Extractor
+
+on:
+  schedule:
+    - cron: "30 1 * * *"   # 1:30 AM UTC = 7:00 AM IST
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-extractor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Restore credentials and token from secrets
+        run: |
+          echo '${{ secrets.GOOGLE_CREDENTIALS_JSON }}' > credentials.json
+          echo '${{ secrets.GOOGLE_TOKEN_JSON }}' > token.json
+
+      - name: Run the extractor
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python -m main
+
+      - name: Commit updated checkpoint
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add last_run.txt
+          git diff --staged --quiet && echo "no changes to commit" || git commit -m "Update checkpoint [skip ci]"
+          git push

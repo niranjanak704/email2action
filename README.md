@@ -6,6 +6,14 @@ Email2Action is an automated email-to-task management system that identifies act
 
 **Tech Stack:** Python | Gmail API | Gemini API | Google Tasks API | OAuth 2.0
 
+## Google Tasks
+
+![Googletask](<email res-1.jpg>)
+
+## Github Actions
+
+![automation](image.png)
+
 ## Key Features
 
 - **Email Filtering:** Identifies actionable emails while filtering out newsletters, promotional messages, and general notifications.
@@ -98,4 +106,4 @@ python quickstart.py
 - Web-based dashboard for task management.
 - Priority-based task classification.
 - Email summarization.
-- Improved deadline detection and task scheduling.
+- Improved deadline detection and task scheduling.s

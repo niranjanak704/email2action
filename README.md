@@ -101,9 +101,3 @@ python quickstart.py
 - Organizing work-related action items.
 - Reducing manual email management.
 
-## Future Improvements
-
-- Web-based dashboard for task management.
-- Priority-based task classification.
-- Email summarization.
-- Improved deadline detection and task scheduling.s
